@@ -91,7 +91,7 @@
       user:
         name: amontin
         state: present
-        groups: sudo
+        groups: root
         shell: /bin/bash
 
     - name: Add SSH key for amontin

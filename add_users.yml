@@ -1,16 +1,109 @@
 ---
-- name: Add multiple users
+- name: Add users with SSH keys
   hosts: all
   become: true
   tasks:
-    - name: Ensure users exist
+    - name: Create tgusmanov user
       user:
-        name: "{{ item }}"
+        name: tgusmanov
+        state: present
+        groups: root
+        shell: /bin/bash
+
+    - name: Add SSH key for tgusmanov
+      authorized_key:
+        user: tgusmanov
+        state: present
+        key: "{{ lookup('file', 'files/tgusmanov.pub') }}"
+    
+    - name: Add sudoers file for tgusmanov
+      tags: always
+      copy:
+        src: sudoer_tgusmanov
+        dest: /etc/sudoers.d/tgusmanov
+        owner: root
+        group: root
+
+    - name: Create okuznetsov user
+      user:
+        name: okuznetsov
+        state: present
+        groups: root
+        shell: /bin/bash
+
+    - name: Add SSH key for okuznetsov
+      authorized_key:
+        user: okuznetsov
+        state: present
+        key: "{{ lookup('file', 'files/okuznetsov.pub') }}"
+
+    - name: Add sudoers file for okuznetsov
+      tags: always
+      copy:
+        src: sudoer_okuznetsov
+        dest: /etc/sudoers.d/okuznetsov
+        owner: root
+        group: root
+
+    - name: Create syemelyanov user
+      user:
+        name: syemelyanov
+        state: present
+        groups: root
+        shell: /bin/bash
+
+    - name: Add SSH key for syemelyanov
+      authorized_key:
+        user: syemelyanov
+        state: present
+        key: "{{ lookup('file', 'files/syemelyanov.pub') }}"
+
+    - name: Add sudoers file for syemelyanov
+      tags: always
+      copy:
+        src: sudoer_syemelyanov
+        dest: /etc/sudoers.d/syemelyanov
+        owner: root
+        group: root
+
+    - name: Create mrudakov user
+      user:
+        name: mrudakov
+        state: present
+        groups: root
+        shell: /bin/bash
+
+    - name: Add SSH key for mrudakov
+      authorized_key:
+        user: mrudakov
+        state: present
+        key: "{{ lookup('file', 'files/mrudakov.pub') }}"
+
+    - name: Add sudoers file for mrudakov
+      tags: always
+      copy:
+        src: sudoer_mrudakov
+        dest: /etc/sudoers.d/mrudakov
+        owner: root
+        group: root
+
+    - name: Create amontin user
+      user:
+        name: amontin
         state: present
         groups: sudo
-      loop:
-        - john
-        - sarah
-        - michelle
-        - michael
+        shell: /bin/bash
 
+    - name: Add SSH key for amontin
+      authorized_key:
+        user: amontin
+        state: present
+        key: "{{ lookup('file', 'files/amontin.pub') }}"
+    
+    - name: Add sudoers file for amontin
+      tags: always
+      copy:
+        src: sudoer_amontin
+        dest: /etc/sudoers.d/amontin
+        owner: root
+        group: root

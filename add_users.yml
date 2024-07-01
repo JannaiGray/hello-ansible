@@ -7,15 +7,31 @@
       user:
         name: tgusmanov
         state: present
-        groups: root
+        groups: sudo  
         shell: /bin/bash
+
+    - name: Create .ssh directory for tgusmanov
+      file:
+        path: /home/tgusmanov/.ssh
+        state: directory
+        mode: '0700'
+        owner: tgusmanov
+        group: tgusmanov
 
     - name: Add SSH key for tgusmanov
       authorized_key:
         user: tgusmanov
         state: present
         key: "{{ lookup('file', 'files/tgusmanov.pub') }}"
-    
+
+    - name: Set permissions for tgusmanov's authorized_keys
+      file:
+        path: /home/tgusmanov/.ssh/authorized_keys
+        state: touch
+        mode: '0600'
+        owner: tgusmanov
+        group: tgusmanov
+
     - name: Add sudoers file for tgusmanov
       tags: always
       copy:
@@ -23,19 +39,36 @@
         dest: /etc/sudoers.d/tgusmanov
         owner: root
         group: root
+        mode: '0440'  
 
     - name: Create okuznetsov user
       user:
         name: okuznetsov
         state: present
-        groups: root
+        groups: sudo  
         shell: /bin/bash
+
+    - name: Create .ssh directory for okuznetsov
+      file:
+        path: /home/okuznetsov/.ssh
+        state: directory
+        mode: '0700'
+        owner: okuznetsov
+        group: okuznetsov
 
     - name: Add SSH key for okuznetsov
       authorized_key:
         user: okuznetsov
         state: present
         key: "{{ lookup('file', 'files/okuznetsov.pub') }}"
+
+    - name: Set permissions for okuznetsov's authorized_keys
+      file:
+        path: /home/okuznetsov/.ssh/authorized_keys
+        state: touch
+        mode: '0600'
+        owner: okuznetsov
+        group: okuznetsov
 
     - name: Add sudoers file for okuznetsov
       tags: always
@@ -44,19 +77,36 @@
         dest: /etc/sudoers.d/okuznetsov
         owner: root
         group: root
+        mode: '0440'  
 
     - name: Create syemelyanov user
       user:
         name: syemelyanov
         state: present
-        groups: root
+        groups: sudo  
         shell: /bin/bash
+
+    - name: Create .ssh directory for syemelyanov
+      file:
+        path: /home/syemelyanov/.ssh
+        state: directory
+        mode: '0700'
+        owner: syemelyanov
+        group: syemelyanov
 
     - name: Add SSH key for syemelyanov
       authorized_key:
         user: syemelyanov
         state: present
         key: "{{ lookup('file', 'files/syemelyanov.pub') }}"
+
+    - name: Set permissions for syemelyanov's authorized_keys
+      file:
+        path: /home/syemelyanov/.ssh/authorized_keys
+        state: touch
+        mode: '0600'
+        owner: syemelyanov
+        group: syemelyanov
 
     - name: Add sudoers file for syemelyanov
       tags: always
@@ -65,19 +115,36 @@
         dest: /etc/sudoers.d/syemelyanov
         owner: root
         group: root
+        mode: '0440'  
 
     - name: Create mrudakov user
       user:
         name: mrudakov
         state: present
-        groups: root
+        groups: sudo  
         shell: /bin/bash
+
+    - name: Create .ssh directory for mrudakov
+      file:
+        path: /home/mrudakov/.ssh
+        state: directory
+        mode: '0700'
+        owner: mrudakov
+        group: mrudakov
 
     - name: Add SSH key for mrudakov
       authorized_key:
         user: mrudakov
         state: present
         key: "{{ lookup('file', 'files/mrudakov.pub') }}"
+
+    - name: Set permissions for mrudakov's authorized_keys
+      file:
+        path: /home/mrudakov/.ssh/authorized_keys
+        state: touch
+        mode: '0600'
+        owner: mrudakov
+        group: mrudakov
 
     - name: Add sudoers file for mrudakov
       tags: always
@@ -86,20 +153,37 @@
         dest: /etc/sudoers.d/mrudakov
         owner: root
         group: root
+        mode: '0440'  
 
     - name: Create amontin user
       user:
         name: amontin
         state: present
-        groups: root
+        groups: sudo  
         shell: /bin/bash
+
+    - name: Create .ssh directory for amontin
+      file:
+        path: /home/amontin/.ssh
+        state: directory
+        mode: '0700'
+        owner: amontin
+        group: amontin
 
     - name: Add SSH key for amontin
       authorized_key:
         user: amontin
         state: present
         key: "{{ lookup('file', 'files/amontin.pub') }}"
-    
+
+    - name: Set permissions for amontin's authorized_keys
+      file:
+        path: /home/amontin/.ssh/authorized_keys
+        state: touch
+        mode: '0600'
+        owner: amontin
+        group: amontin
+
     - name: Add sudoers file for amontin
       tags: always
       copy:
@@ -107,3 +191,5 @@
         dest: /etc/sudoers.d/amontin
         owner: root
         group: root
+        mode: '0440'  
+
